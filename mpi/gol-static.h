@@ -1,6 +1,6 @@
 /**************************************************************************
  * Game of Life (v1.0)
- *   An example implementation of Conway's Game of Life in C using 
+ *   An example implementation of Conway's Game of Life in C using
  *   static data types.
  *
  * author: Martti Louhivuori (martti.louhivuori@csc.fi)

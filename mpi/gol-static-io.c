@@ -1,6 +1,6 @@
 /**************************************************************************
  * Game of Life (v1.0)
- *   An example implementation of Conway's Game of Life in C using 
+ *   An example implementation of Conway's Game of Life in C using
  *   static data types.
  *
  * author: Martti Louhivuori (martti.louhivuori@csc.fi)
@@ -27,22 +27,22 @@ state load(char filename[]) {
 		exit(IOERR);
 	}
 	/* read and check meta data */
-	err = fscanf(fp, "P1\n# generation %d\n%d %d\n", 
+	err = fscanf(fp, "P1\n# generation %d\n%d %d\n",
 			&world.generation, &world.cols, &world.rows);
 	if (err != 3) {
 		fprintf(stderr, "ERROR: invalid header in '%s'\n", filename);
 		exit(METAERR);
 	}
-	if ( (world.rows < 1 || world.rows > MAXROWS) 
+	if ( (world.rows < 1 || world.rows > MAXROWS)
 			|| (world.cols < 1 || world.cols > MAXCOLS) ) {
-		fprintf(stderr, "ERROR: grid dimensions too large (max. %d x %d)\n", 
+		fprintf(stderr, "ERROR: grid dimensions too large (max. %d x %d)\n",
 				MAXCOLS, MAXROWS);
 		exit(GRIDERR);
 	}
 	/* initialise to zero */
 	world.count = 0;
-	for (i=0; i < world.rows+2; i++) 
-		for (j=0; j < world.cols+2; j++) 
+	for (i=0; i < world.rows+2; i++)
+		for (j=0; j < world.cols+2; j++)
 			world.space[i][j] = 0;
 	/* read cell grid */
 	for (i=0; i < world.rows; i++) {
@@ -76,7 +76,7 @@ int save(char filename[], state world) {
 	if (fp == NULL) // fopen failed
 		return 1;
 	/* write metadata */
-	fprintf(fp, "P1\n# generation %d\n%d %d\n", 
+	fprintf(fp, "P1\n# generation %d\n%d %d\n",
 			world.generation, world.cols, world.rows);
 	/* write cell grid */
 	for (i=0; i < world.rows; i++) {
@@ -90,14 +90,14 @@ int save(char filename[], state world) {
 	return 0;
 }
 
-/* 
+/*
  * Output GoL state to STDOUT.
  *   world  --  (state) generation to output
  */
 void echo(state world) {
 	int i, j;
 
-	printf("P1\n# generation %d\n%d %d\n", 
+	printf("P1\n# generation %d\n%d %d\n",
 			world.generation, world.cols, world.rows);
 	for (i=0; i < world.rows; i++) {
 		for (j=0; j < world.cols; j++) {

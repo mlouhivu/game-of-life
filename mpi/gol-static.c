@@ -1,6 +1,6 @@
 /**************************************************************************
  * Game of Life (v1.0)
- *   An example implementation of Conway's Game of Life in C using 
+ *   An example implementation of Conway's Game of Life in C using
  *   static data types.
  *
  * files:
@@ -44,16 +44,16 @@ state update(state prev) {
 	next.generation = prev.generation + 1;
 	/* all DEAD by default */
 	next.count = 0;
-	for (i=0; i < next.rows + 2; i++) 
-		for (j=0; j < next.cols + 2; j++) 
+	for (i=0; i < next.rows + 2; i++)
+		for (j=0; j < next.cols + 2; j++)
 			next.space[i][j] = DEAD;
 
 	/* check for ALIVE cells */
 	for (i=1; i <= prev.rows; i++) {
 		for (j=1; j <= prev.cols; j++) {
-			n =   prev.space[i-1][j-1] + prev.space[i-1][j] 
-				+ prev.space[i-1][j+1] + prev.space[i][j-1] 
-				+ prev.space[i][j+1]   + prev.space[i+1][j-1] 
+			n =   prev.space[i-1][j-1] + prev.space[i-1][j]
+				+ prev.space[i-1][j+1] + prev.space[i][j-1]
+				+ prev.space[i][j+1]   + prev.space[i+1][j-1]
 				+ prev.space[i+1][j]   + prev.space[i+1][j+1];
 			if ( (n == 3) || (n == 2 && prev.space[i][j]) ) {
 				next.space[i][j] = ALIVE;
@@ -77,27 +77,27 @@ state create(int n, int m) {
 	state world;
 	int i, j;
 	unsigned int seed;
-	
+
 	seed = (unsigned int) time(NULL);
 	srand(seed);
 
-	for (i=0; i < n+2; i++) 
-		for (j=0; j< m+2; j++) 
+	for (i=0; i < n+2; i++)
+		for (j=0; j< m+2; j++)
 			world.space[i][j] = DEAD;
 
 	world.cols = n;
 	world.rows = m;
 	world.generation = 0;
 	for (i=1; i < m+1; i++)
-		for (j=1; j < n+1; j++) 
+		for (j=1; j < n+1; j++)
 			world.space[i][j] = (int) (rand() % 2);
 
 	return world;
 }
 
-/* 
+/*
  * Game of Life.
- *   Load an initial state, run for a number of iterations and save the 
+ *   Load an initial state, run for a number of iterations and save the
  *   end state.
  */
 void main(int argc, char *argv[]) {
@@ -136,7 +136,7 @@ void main(int argc, char *argv[]) {
 		n = m = 0;
 	} else {
                 /* create a random initial state */
-                sscanf(argv[2], "%d", &n); 
+                sscanf(argv[2], "%d", &n);
                 sscanf(argv[3], "%d", &m);
                 nloc = n / Px;
                 mloc = m / Py;

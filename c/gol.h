@@ -29,7 +29,7 @@
 typedef struct {
 	int   rows;       	/* no. of rows in grid */
 	int   cols;       	/* no. of columns in grid */
-	short **space;    	/* a pointer to a list of pointers for storing 
+	short **space;    	/* a pointer to a list of pointers for storing
                       	   a dynamic NxM grid of cells + borders */
 	int   generation; 	/* age of system */
 	int   count;      	/* no. of alive cells */
