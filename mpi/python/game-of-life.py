@@ -30,9 +30,7 @@ board = np.zeros((32, 32), int)
 board[15,:] = 1
 board[:,15] = 1
 
-# board[:] = np.random.rand(32, 32).round(0)
-
-# determine parallezation parameters
+# determine parallelisation parameters
 nprocs = comm.Get_size()
 rank = comm.Get_rank()
 loc_dim = 32 / nprocs
@@ -52,9 +50,7 @@ if up > nprocs-1:
 
 if rank == 0:
     pl.hold(False)
-    pl.imshow(board, cmap = pl.cm.prism)
-    pl.savefig('game_{0:03d}.png'.format(0))
-#    pl.imshow(board, cmap = pl.cm.prism)
+
 for iter in range(30):
     # send up, receive from down
     sbuf = loc_board[-2,:]
@@ -74,9 +70,17 @@ for iter in range(30):
     comm.Gather(loc_board[1:-1,:], board)
     if rank == 0:
         pl.imshow(board, cmap = pl.cm.prism)
-        pl.savefig('game_{0:03d}.png'.format(iter+1))
+        pl.savefig('output-{0:03d}.png'.format(iter))
 
 # Create animated gif using Imagemagic
 if rank == 0:
-    os.system('convert game_???.png game.gif')
-    os.system('rm -fr game_???.png')
+    try:
+        err = os.system('convert output-???.png output.gif 2> /dev/null')
+        if not err:
+            os.system('rm -fr output-???.png')
+            print 'Animation saved as output.gif'
+        else:
+            raise OSError
+    except OSError:
+        print 'Image snapshots saved as output-*.png. To animate try e.g.:'
+        print '  animate -delay 10 output-*.png'
